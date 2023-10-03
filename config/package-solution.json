@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "homepage-client-side-solution",
+    "id": "47e64f82-7d9a-4ab9-aed6-c5bcee21aecf",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.18.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Homepage description"
+      },
+      "longDescription": {
+        "default": "Homepage description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "homepage Feature",
+        "description": "The feature that activates elements of the homepage solution.",
+        "id": "57f4f9d6-4abf-43f4-8b9e-0fcd7f79e9a0",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/homepage.sppkg"
+  }
+}
