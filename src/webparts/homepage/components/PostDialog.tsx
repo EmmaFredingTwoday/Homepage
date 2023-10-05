@@ -82,7 +82,9 @@ export default class PostDialog extends BaseDialog {
      */
     constructor(
         public onSave: (header: string, content: string, author: string) => Promise<void>,
-        public onClose: () => Promise<void>) {
+        public onClose: () => Promise<void>,
+        public listName: string
+        ) {
         super({isBlocking: true});        
         this._sp = getSP();
     }
@@ -91,6 +93,7 @@ export default class PostDialog extends BaseDialog {
         ReactDOM.render(<TaskDialogContent
                 onSave={this._save}
                 onClose={this._close}
+                listName={this.listName}
             />,
             this.domElement);
     }
@@ -108,12 +111,13 @@ export default class PostDialog extends BaseDialog {
     private _save = async (header: string, content: string, author: string ): Promise<void> => {
         try{
             const spCache = spfi(this._sp).using(Caching({store:"session"}));
-              const iar:IItemAddResult = await spCache.web.lists.getById('5e2a5dd4-1b38-425a-bf24-15caa44266c5').items.add({
+              const iar:IItemAddResult = await spCache.web.lists.getByTitle(this.listName).items.add({
                   Title: header || "Unknown",
                   Content: content || "Unknown",
                   Author0: author || "Unknown" 
                 })
-                console.log(iar);
+                console.log("header " + header + " | content " + content + " | author " + author + " " + iar)
+                console.log("LISTNAME " + this.listName);
             } 	
             catch(err){
             Logger.write(`${this.LOG_SOURCE} (_save) - ${JSON.stringify(err)} - `, LogLevel.Error);

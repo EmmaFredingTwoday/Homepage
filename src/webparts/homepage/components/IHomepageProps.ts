@@ -5,4 +5,7 @@ export interface IHomepageProps {
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
+  company: string;
+  intranetUrl: string;
+  publicSite: boolean;
 }

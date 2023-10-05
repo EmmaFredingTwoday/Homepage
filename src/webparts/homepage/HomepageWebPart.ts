@@ -3,7 +3,8 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   type IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  PropertyPaneToggle
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart, WebPartContext } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
@@ -36,6 +37,9 @@ export const getSp = (context?: WebPartContext): SPFI => {
 export interface IHomepageWebPartProps {
   description: string;
   listName: string;
+  company: string;
+  intranetUrl: string;
+  public: boolean
 }
 
 export default class HomepageWebPart extends BaseClientSideWebPart<IHomepageWebPartProps> {
@@ -49,10 +53,13 @@ export default class HomepageWebPart extends BaseClientSideWebPart<IHomepageWebP
       {
         description: this.properties.description,
         listName: this.properties.listName,
+        company: this.properties.company,
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        intranetUrl: this.properties.intranetUrl,
+        publicSite: this.properties.public
       }
     );
 
@@ -137,6 +144,15 @@ export default class HomepageWebPart extends BaseClientSideWebPart<IHomepageWebP
                 }),
                 PropertyPaneTextField('listName', {
                   label: strings.ListNameFieldLabel
+                }),
+                PropertyPaneTextField('company', {
+                  label: strings.CompanyNameFieldLabel
+                }),
+                PropertyPaneTextField('intranetUrl', {
+                  label: strings.IntranetUrlFieldLabel
+                }),
+                PropertyPaneToggle('public', {
+                  label: strings.PublicFieldLabel
                 })
               ]
             }

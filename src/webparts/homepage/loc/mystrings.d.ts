@@ -3,6 +3,7 @@ declare interface IHomepageWebPartStrings {
   BasicGroupName: string;
   DescriptionFieldLabel: string;
   ListNameFieldLabel: string;
+  CompanyNameFieldLabel: string;
   AppLocalEnvironmentSharePoint: string;
   AppLocalEnvironmentTeams: string;
   AppLocalEnvironmentOffice: string;
@@ -12,6 +13,8 @@ declare interface IHomepageWebPartStrings {
   AppOfficeEnvironment: string;
   AppOutlookEnvironment: string;
   UnknownEnvironment: string;
+  IntranetUrlFieldLabel: string;
+  PublicFieldLabel: string;
 }
 
 declare module 'HomepageWebPartStrings' {

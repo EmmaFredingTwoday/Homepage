@@ -8,7 +8,8 @@ import { IListItem, IListState, IResponseItem } from './interfaces'
 import { getSP } from '../pnpjsConfig';
 import { PrimaryButton  } from '@fluentui/react';
 import  PostDialog from './PostDialog'
-//import dayjs from 'dayjs';
+import dayjs from 'dayjs';
+import styles from './Homepage.module.scss'
 
 export default class Homepage extends React.Component<IHomepageProps, IListState> {
 
@@ -33,27 +34,52 @@ export default class Homepage extends React.Component<IHomepageProps, IListState
   public render(): React.ReactElement<IHomepageProps> {
     const {
       listName,
+      company,
+      userDisplayName,
+      intranetUrl,
+      publicSite
     } = this.props;
 
-    console.log(listName + this.state.items + " asdas  " + this.state.renderList);
+    console.log("intranetUrl " +intranetUrl + " listname "+ listName );
 
+    let shortTime = "";
+
+    if(company === userDisplayName){
     return (
-      <section>
-        {this.state.items.map((item: any) => {
-          <div>
-            <div>{item.Title}</div>
-            <div>{item.Content}</div>
-          </div>
-        })}
-      <PrimaryButton text="Skapa inlägg" title="Skapa inlägg" onClick={this._createPost}/>
+      <section> 
+      <div className={styles.buttonMargin}>       
+        <span className={styles.someSpace}><PrimaryButton text="Skapa inlägg" title="Skapa inlägg" onClick={this._createPost} /> </span>
+        <span className={publicSite? undefined : styles.hidden }><PrimaryButton text="Intranät" title="Intranät" href={intranetUrl} /></span>     
+      </div>  
+        {this.state.items.map((item: any) => (
+            shortTime = dayjs(item.Created).format("HH:mm"),
+            <article>              
+              <h1>{item.Title}</h1>               
+              <p className={styles.content}>{item.Content}</p>
+              <span>{shortTime}</span> <span>{item.Author0}</span>                       
+            </article>
+          ))}             
       </section>
-    );
+    )} else {
+      return (
+        <section> 
+          {this.state.items.map((item: any) => (
+              shortTime = dayjs(item.Created).format("HH:mm"),
+              <article>              
+                <h1>{item.Title}</h1>               
+                <p className={styles.content}>{item.Content}</p>
+                <span>{shortTime}</span> <span>{item.Author0}</span>                       
+              </article>
+            ))}             
+        </section>
+    )}
   }
 
   private _createPost = async (): Promise<void> => {
     const taskDialog = new PostDialog(      
       async (header, content, author) => {},
-      async () => alert('You closed the dialog!')
+      async () => alert('You closed the dialog!'),
+      this.props.listName
     );
     this.setState({renderList: true});
     taskDialog.show();  

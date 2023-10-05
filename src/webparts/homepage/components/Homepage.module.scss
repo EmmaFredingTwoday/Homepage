@@ -21,7 +21,7 @@
 
 .dialog {
   width: 700px;
-  height: 1200px;
+  height: 700px;
 }
 
 .links {
@@ -37,3 +37,62 @@
     }
   }
 }
+
+h1 {
+  font-size: 22px;
+  font-family: 'Segoe UI';
+  margin-top: 22px;
+  margin-bottom: 5px;
+}
+
+.content {
+  padding-bottom: 4px;
+  font-size: 16px;
+  font-family: 'Segoe UI';
+  margin-top: 10px;
+}
+
+.timeCreated {
+  padding-bottom: 0px;
+  margin-top: 22px;
+  margin-bottom: 0px;
+  font-size: 14px;
+}
+
+.buttonMargin {
+   margin-bottom: 15px;
+}
+
+.grid {
+  @include ms-Grid;
+}
+
+.ms_grid_row {
+  @include ms-Grid-row;
+}
+
+.ms_grid_col1 {
+  @include ms-sm1;
+  @include ms-Grid-col;
+  text-align: left;
+  padding:0px;
+}
+
+.ms_grid_col11 {  
+  @include ms-sm11;
+  @include ms-Grid-col;  
+  text-align: left;
+}
+
+span {  
+  margin-left: 0px;
+  margin-right: 10px;
+}
+
+.someSpace {
+  margin-left: 0px;
+  margin-right: 50px;
+  float:left;
+}
+
+.hidden { visibility:hidden; }
